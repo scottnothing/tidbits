@@ -1,0 +1,22 @@
+#!/bin/bash
+# A script to download files from google drive
+# https://www.quora.com/How-do-I-download-a-very-large-file-from-Google-Drive
+#
+# 1. Get the file ID:
+#   a. Go to your Google Drive in your browser.
+#   b. Right-click (or control-click) the file you want to download and click “Get shareable link”. 
+#      The link looks like this: https://drive.google.com/open?id=XXXXX. Make note of the file ID “XXXXX”; 
+#      you will be needing it below.
+#
+# 2. Get an OAuth token:
+#   a. Go to OAuth 2.0 Playground, https://developers.google.com/oauthplayground/
+#   b. In the “Select the Scope” box, scroll down, expand “Drive API v3”, and select https://www.googleapis.com/auth/drive.readonly
+#   c. Click “Authorize APIs” and then “Exchange authorization code for tokens”. Copy the “Access token” and paste it here;
+#
+# 3. Run this script. 
+# Usage:
+#   ./gdrive_download XXXXXX <output_file_name>
+
+TOKEN="paste_token_here"
+
+curl -H "Authorization: Bearer $KEY" -C - https://www.googleapis.com/drive/v3/files/$1?alt=media -o $2
